@@ -1,0 +1,362 @@
+/*
+ * TECLAB MIXINS
+ * Common mixins to all our websites
+ * ______________________________________
+ * Align to center
+ * Animated transition
+ * Background size
+ * CSS Blur
+ * Fixed ratio for image frames
+ * Fixed 16:9 ratio for videos
+ * Pusing Bootstrap Further
+ ** Columns width responsive to available space
+ ** Column’s horizontal paddings & margins
+ ** Simple paddings to axis
+ ** Input’s placeholder color
+ * Common color pigmentation
+ ** Pigments for colors
+ ** Pigments for icons
+ ** Pigments for background-colors
+ * Looping heading tags
+ * Text Shadow Borders
+ * Height toggle seemore containers
+ */
+
+
+// ALIGN TO CENTER
+@mixin align-center($max-width) {
+    max-width: $max-width;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+// ANIMATED TRANSITION
+@mixin anim($speed: 0.3, $attr: all, $animStyle: ease) {
+    $speed_s: $speed + s; //string interpolation as seconds
+    //
+    -webkit-transition: $attr $speed_s $animStyle;
+    -moz-transition: $attr $speed_s $animStyle;
+    -o-transition: $attr $speed_s $animStyle;
+    transition: $attr $speed_s $animStyle;
+}
+
+// BACKGROUND SIZE
+@mixin bg-size($value: 100%) {
+    -webkit-background-size: $value;
+    -moz-background-size: $value;
+    -o-background-size: $value;
+    background-size: $value;
+}
+
+/*
+ * CSS BLUR
+ * thenewcode.com/534/Cross-browser-Image-Blur-with-CSS
+ * NOTE: Do NOT use "none", set it to "0" instead since numeric values are required.
+ */
+@mixin blur($radius_px) {
+    -webkit-filter: blur($radius_px);
+    filter: blur($radius_px);
+}
+
+
+/*
+ * FIXED RATIO FOR IMAGE FRAMES
+ * Control aspect ratio to center align child <img> tag
+ * Requirement: Can only contain an image tag and nothing else.
+ */
+@mixin img-frame-fixed-ratio ( $ratioX: 1, $ratioY: 1, $framePadding: 0 ) {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //
+    &:before {
+        content: '';
+        display: block;
+        width: 0;
+        padding-top: ($ratioY / $ratioX) * 100%;
+    }
+
+    > img {
+        flex: 0 0 auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+        padding: $framePadding;
+    }
+}
+
+
+/*
+ * FIXED 16:9 RATIO FOR VIDEOS
+ * Control aspect ratio to center align child <img> tag
+ * Requirement: Can only contain an image tag and nothing else.
+ */
+@mixin video-fixed-ratio ( $ratioX: 16, $ratioY: 9 ) {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 0;
+    //
+    &:before {
+        content: '';
+        display: block;
+        padding-top: ($ratioY / $ratioX) * 100%;
+    }
+
+    > iframe,
+    > object,
+    > video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+/* -------------------------------------
+ * PUSHING BOOTSTRAP FURTHER
+ * optimization of the bootstrap 4 mixins/_grid.scss
+ */
+
+// Columns width responsive to available space
+@mixin make-row-for-two-col($firstWidth: 100%, $lastWidth: 100% ) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: center;
+    margin-right: (-($grid-gutter-width /2));
+    margin-left: (-($grid-gutter-width /2));
+
+    @if is-superselector('ul', &) {
+        position: relative;
+        margin-bottom: 0;
+        padding: 0;
+    }
+    @else if is-superselector('dl', &) {
+        margin-bottom: 0;
+        //
+        > dt,
+        > dd {
+            flex: 0 0 auto;
+            position: relative;
+            width: 100%;
+        }
+        > dt {
+            flex-basis: $firstWidth;
+            max-width: $firstWidth;
+            padding-right: ($grid-gutter-width /2);
+            padding-left: ($grid-gutter-width /2);
+        }
+        > dd {
+            flex-basis: $lastWidth;
+            max-width: $lastWidth;
+            margin-bottom: 0;
+            padding-right: ($grid-gutter-width /2);
+            padding-left: 0;
+        }
+    }
+    @else {
+        & > div,
+        & > li {
+            flex: 0 0 auto;
+            position: relative;
+            width: 100%;
+            padding-right: ($grid-gutter-width /2);
+            padding-left: ($grid-gutter-width /2);
+
+            &:first-child {
+                flex-basis: $firstWidth;
+                max-width: $firstWidth;
+            }
+
+            &:last-child {
+                flex-basis: $lastWidth;
+                max-width: $lastWidth;
+            }
+        }
+    }
+}
+
+// Column’s horizontal paddings & margins
+@mixin side-padding-margin( $padding_value: ($grid-gutter-width /2), $margin_value: (-($grid-gutter-width /2)) ) {
+    // margins
+    @if ($margin_value == false) {
+        margin-right: (-($grid-gutter-width /2));
+        margin-left: (-($grid-gutter-width /2));
+    }
+    @else {
+        margin-right: $margin-value;
+        margin-left: $margin-value;
+    }
+    // paddings
+    @if ($padding_value == false) {
+        padding-right: ($grid-gutter-width /2);
+        padding-left: ($grid-gutter-width /2);
+    }
+
+    @else if ($padding_value == true) {
+        padding-right: ($grid-gutter-width);
+        padding-left: ($grid-gutter-width);
+    }
+    @else {
+        padding-right: $padding_value;
+        padding-left: $padding_value;
+    }
+}
+
+/**
+ * SIMPLE PADDINGS TO AXIS
+*/
+
+// padding-Left + (if) padding-Right
+@mixin padding_x($padding_Left, $padding_Right: $padding_Left) {
+    padding-left: $padding_Left;
+    padding-right: $padding_Right;
+}
+// padding-Top + (if) padding-Bottom
+@mixin padding_y($padding_Top, $padding_Bottom: $padding_Top) {
+    padding-top: $padding_Top;
+    padding-bottom: $padding_Bottom;
+}
+
+/**
+ * INPUT’S PLACEHOLDER COLORS
+ * Expending Bootstrap4 input's placeholder color to more browsers
+ * reference: stackoverflow.com/questions/20773665/fail-to-change-placeholder-color-with-bootstrap-3
+ */
+@mixin input-placeholder-color($color: $input-color-placeholder) {
+    // Firefox
+    &::-moz-placeholder {
+        color: $color;
+        opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
+    }
+    // Internet Explorer 10+
+    &:-ms-input-placeholder {
+        color: $color;
+    }
+    // Safari and Chrome
+    &::-webkit-input-placeholder {
+        color: $color;
+    }
+}
+
+
+/** ---------------------------------
+ * COMMON COLOR PIGMENTATION
+ */
+
+// pigments for colors
+@mixin pigment-color-hover( $colorBase, $colorHover, $decorationBase:none, $decorationHover:none ) {
+    color: $colorBase;
+    text-decoration: $decorationBase;
+
+    &:hover, &:focus {
+        color: $colorHover;
+        text-decoration: $decorationHover;
+    }
+}
+/// pigments for icons
+@mixin pigment-icon-hover( $colorBase, $colorHover ) {
+    &:before {
+        color: $colorBase;
+    }
+
+    &:hover, &:focus {
+        &:before {
+            color: $colorHover;
+        }
+    }
+}
+/// pigments for background-colors
+@mixin pigment-bgColorBorder-hover( $bgBase, $bgHover, $borderBase: $bgBase, $borderHover: $bgHover ) {
+    background-color: $bgBase;
+
+
+    @if ($borderBase == false) {
+        border-color: $bgBase;
+    }
+
+    @else if ($borderBase == true) {
+        border-color: $pigment_cta;
+    }
+
+    @else {
+        border-color: $borderBase;
+    }
+
+    &:hover, &:focus {
+        background-color: $bgHover;
+
+        @if ($borderHover == false) {
+            border-color: $bgHover;
+        }
+
+        @else if ($borderHover == true) {
+            border-color: $pigment_primary;
+        }
+
+        @else {
+            border-color: $borderHover;
+        }
+    }
+}
+
+/** --------------------------------------
+ * LOOPING HEADING TAGS
+ * Setup the function in your functions or helpers files, wherever you keep these bits.
+ * reference: guwii.com/bytes/sass-function-loop-headings-h1h2h3h4h5h6/
+ * usage:  #{headingTags(1,3)} = h1,h2,h3
+*/
+@function headingTags($from: 1, $to: 6) {
+    @if $from == $to {
+        @return 'h#{$from}';
+    }
+    @else {
+        @return 'h#{$from},' + headingTags($from+1, $to);
+    }
+}
+
+/** --------------------------------------
+ * TEXT SHADOW BORDERS
+ * reference: css-tricks.com/adding-stroke-to-web-text/
+*/
+@mixin text-shadow-border($borderCorlor: black ) {
+    text-shadow: 
+        -1px -1px 0 $borderCorlor,
+         1px -1px 0 $borderCorlor, 
+        -1px  1px 0 $borderCorlor, 
+         1px  1px 0 $borderCorlor;
+}
+
+
+/** --------------------------------------
+ * HEIGHT TOGGLE SEEMORE CONTAINERS
+ * This mixin requires html attribute [data-seemore-container] and "js/SeeMore.js"
+ * reference: 
+ */
+@mixin height-toggle-seemore( $collapsed_Height: 3rem, $expanded_Height: 100% ) {
+    overflow: hidden;
+    @include anim();
+    // *[data-seemore-container]
+    &:not([data-seemore-expanded]) {
+        height: $collapsed_Height;
+    }
+    // *[data-seemore-container + data-seemore-expanded]
+    &[data-seemore-expanded] {
+        height: $expanded_Height;
+    }
+}

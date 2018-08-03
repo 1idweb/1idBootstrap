@@ -1,0 +1,133 @@
+/*
+ * APP VARIABLES
+ * Site specific variables to be used and reused within both 
+ * bootstrap library AND, as is, in all TEC stylesheets.
+ *
+ * author: Martin Dube, 2018/05
+ * ___________________________________________
+ * 
+ * Paths to libraries
+ * Grid
+ * Style
+ ** Colors
+ ** Typography
+ * Components
+ */
+
+/* -----------------
+ * PATHS TO LIBRARIES ...... TODO: Implement those vars
+
+$path_node_modules: "../../../../../node_modules/" !default;
+$path_sad: "../../tecLab" !default;
+$path_tecLab: "../../tecLab" !default;
+$path_vendors: "../../../../vendors/" !default;
+*/
+
+/* -----------------
+ * GRID
+ * used in both _site.grid.scss + _app.bootstrap-variables.scss
+ */
+ $dimension_siteGrid_gutter: 30px;
+ $dimension_siteGrid_maxWidth_desktop: 1152px;
+ $breakpoint_Desktop: md;
+ $breakpoint_uiElements_Desktop: sm;
+ /* -----------------
+  * STYLE/ Colors
+  * from both _data.color-chart.scss + designer's mockup for homepage
+  * "*-cta" = custom $theme-colors for Bootstrap array set within _app.bootstrap-variables (line 51)
+  */
+ // used everywhere
+ $pigment_white: $te2-white;
+ $pigment_black: $te2-black;
+ $pigment_primary: $te2-blue-main;
+ $pigment_secondary: $te2-orange-main;
+ $pigment_cta: $te2-blue-dark;
+ $pigment_body: $te2-gray-200;
+ $pigment_content_bg: $te2-white;
+ $pigment_text: $te2-black;
+ $pigment_disabled: $te2-gray-600;
+ $pigment_borders: $te2-gray-200;
+ $pigment_ui_dark: $te2-gray-600;
+ $pigment_ui_light: $te2-gray-200;
+ $pigment_ui_accent: $te2-orange-main;
+ $pigment_ui_accent_dark: $te2-brown;
+ $pigment_ui_accent_light: $te2-yellow;
+ $pigment_brand_facebook: #29487d;
+ $pigment_brand_googleP: #cf5d46;
+ $pigment_brand_linkedin: #005983;
+ $pigment_brand_twitter: #63AEEB;
+ $pigment_tecLogo: $te2-logo;
+ // used in /css-sources/layout/...
+ $site_bg-theme_color: #004b70 !default;
+ $site_footer_text-color: $te2-white !default;
+ $site_corporate-footer_link-color: $pigment_secondary !default;
+ $site_corporate-footer_bg-color: #1C3960 !default;
+ $site_nav-footer_bg-color: #1C3960 !default;
+ // fallbacks if (depricated) bootstrap v3 variables are used by mistake
+ $brand-primary: $pigment_primary;
+ $text-color: $pigment_text;
+ 
+ /*
+  * STYLE/ Typography
+  */
+ $fontSize_base: 1rem;       //~16px, same default as bootstrap v4
+ $fontSize_big: 1.125rem;    //~18px
+ $fontSize_small: 0.75rem;   //~12px
+ $fontSize_pageTitle: ($fontSize_base *2);       //~32px
+ $fontSize_blockTitle: ($fontSize_base *1.375);  //~22px
+ // from _app.fonts
+ $fontFamily_base: "Roboto", Roboto, "Helvetica Neue", Arial, sans-serif;
+ $fontFamily_Roboto: "Roboto";
+ $weight_fa_solid: 900;
+ $weight_fa_regular: 400;
+ $weight_fa_light: 300;
+ $weight_fa_brand: 400;
+ $weight_roboto_regular: 300;
+ $weight_roboto_bold: 700;
+ 
+ // accent colored UI elements
+ $app_ui_border_small: 1px;
+ $app_ui_border_thick: 7px;
+ 
+ // from _site.scaffolds: Selection column remover control
+ $app_hr-selection_height: 1.4;
+ 
+ // from _cards.scss
+ $dimension_card-items_inner-width: 110px;
+ $dimension_cards-grid_card-items_side-gutters_XS: 25px;
+ $dimension_cards-grid_card-items_side-gutters_SM: 20px;
+ $dimension_cards-grid_card-items_side-gutters_MD: 22px;
+ $dimension_cards-grid_card-items_side-gutters_LG: 20px;
+ $dimension_cards-grid_card-items_side-gutters_XL: 45px;
+ 
+ // for author's avatar images
+ $dimension_TeaserAuthorFigure_diameter: 50px;
+ $dimension_PostAuthorFigure_diameter: 60px;
+ 
+ // from _btn.social-networks
+ $dimension_socialBtn_diameter: 32px;
+ /* -----------------
+  * COMPONENTS
+  * used in /css-sources/components/
+  */
+ $component_Progressbar_height: 15px;
+ $component_Progressbar_border-radius: 0;
+ $component_Progressbar_bg-color: $te2-gray-200;
+ $component_Progressbar_value-color: $te2-yellow;
+ 
+ $component_RatingReviewCount_color: $te2-gray-600;
+ 
+ $component_ScoreIcons_size:             1;
+ $component_ScoreIcons_colorDesabled:    $te2-gray-200;
+ $component_ScoreIcons_stars_color:      $te2-yellow;
+ $component_ScoreIcons_stars_size:       1;
+ $component_ScoreIcons_dollars_color:    $te2-blue-main;
+ $component_ScoreIcons_dollars_size:     1;
+ 
+ $component_Pagination_pigment_active_color: $te2_white;
+ $component_Pagination_pigment_active_bg: $pigment_secondary;
+ $component_Pagination_pigment_links_color: $te2-gray-600;
+ $component_Pagination_pigment_links_bg: $te2_white;
+ $component_Pagination_pigment_links-hover_bg: $te2-yellow;
+ $component_Pagination_pigment_links-disabled_bg: $te2_white;
+ 

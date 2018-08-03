@@ -1,0 +1,104 @@
+/*
+* Common CSS Reset/Base on HTML tags, for all our websites.
+*
+** NOTES:
+*** All $hex-* content variables requires _data.character-unicode.scss to be imported in the project.
+* ____________________________________________
+*
+** TYPOGRAPHY
+*** Links
+*** Quotation mark <q>
+*/
+
+
+// set-up
+html,
+body {
+    min-height: 100%;
+    height: auto;
+}
+
+
+/// Same list-style for all <ul> levels
+ul {
+    list-style-type: disc;
+}
+
+/** -----------------------------
+ * TYPOGRAPHY
+ */
+
+main {
+    // over-rule "bootstrap/_reboot.scss"
+    b,
+    strong {
+        font-weight: $weight_roboto_bold;
+    }
+}
+
+/// Mouse hover on all clikable stuff
+a,
+label[for]:not(:empty) {
+    cursor: pointer;
+
+    &:not([href]):not([tabindex]) {
+    }
+
+    &[disabled],
+    &.disabled {
+        cursor: default;
+    }
+}
+
+/// Wrap a string with HTML brackets
+kbd,
+code {
+    &.bracket,
+    &.brackets {
+        &:before {
+            content: $hex-html-bracket-left;
+        }
+
+        &:after {
+            content: $hex-html-bracket-right;
+        }
+        padding-right: 2px;
+        padding-left: 2px;
+    }
+
+    &.curlybracket,
+    &.curlybrackets {
+        &:before {
+            content: $hex-html-bracket-left;
+        }
+
+        &:after {
+            content: $hex-html-bracket-right;
+        }
+    }
+}
+
+/// Quotation mark <q> for multi-lingual
+q {
+    // default
+    &,
+    &:lang(en), &:lang(en-CA), &:lang(en-GB), &:lang(en-US) {
+        &:before {
+            content: $hex-ldquo; // english opening quote
+        }
+        &:after {
+            content: $hex-rdquo; // english closing quote
+        }
+    }
+    // latin
+    &:lang(fr), &:lang(fr-FR), &:lang(fr-CA),
+    &:lang(es), &:lang(es-ES), &:lang(es-US) {
+        &:before {
+            content: $hex-laquo; // latin opening quote
+        }
+        &:after {
+            content: $hex-raquo; // latin closing quote
+        }
+    }
+}
+

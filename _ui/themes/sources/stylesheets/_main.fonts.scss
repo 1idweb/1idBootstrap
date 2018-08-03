@@ -1,0 +1,21 @@
+/*
+ * FONTS
+ * ____________________________________________
+ *
+ * Site text is (all) ROBOTO    : teccenters.atlassian.net/wiki/x/ZgDKGQ
+ * Site icons are FontAwesome5  : teccenters.atlassian.net/wiki/x/ZADFGQ
+ */
+
+
+// _app.variables
+$weight_fa_solid:      900 !default;
+$weight_fa_regular:    400 !default;
+$weight_fa_light:      300 !default;
+$weight_fa_brand:      400 !default;
+
+$weight_roboto_regular:    300 !default;
+$weight_roboto_bold:       700 !default; // see bootstrap/_type.scss to fix this one
+
+// import font-faces
+@import url("//fonts.googleapis.com/css?family=Roboto:300,700");
+
